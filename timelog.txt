@@ -1,0 +1,80 @@
+Initialize duration: 26.64 seconds
+Get Cookies duration: 33.87 seconds
+Minecraft Timer duration: 0.02 seconds
+Get Security Data duration: 11.62 seconds
+Initialize duration: 2.83 seconds
+Initialize duration: 2.75 seconds
+Get Cookies duration: 6.28 seconds
+Minecraft Timer duration: 4.84 seconds
+Get Security Data duration: 6.73 seconds
+Securing Promises duration: 18.67 seconds
+Finishing & New Info duration: 2.48 seconds
+----------------------
+Initialize duration: 6.54 seconds
+Get Cookies duration: 13.66 seconds
+Minecraft Timer duration: 2.53 seconds
+Get Security Data duration: 5.97 seconds
+Securing Promises duration: 10.73 seconds
+Finishing & New Info duration: 2.80 seconds
+----------------------
+Initialize duration: 4.36 seconds
+Get Cookies duration: 9.99 seconds
+Minecraft Timer duration: 0.01 seconds
+Get Security Data duration: 7.97 seconds
+Securing Promises duration: 17.00 seconds
+Finishing & New Info duration: 1.98 seconds
+----------------------
+Initialize duration: 3.51 seconds
+Get Cookies duration: 36.91 seconds
+Minecraft Timer duration: 2.99 seconds
+Get Security Data duration: 7.09 seconds
+Securing Promises duration: 29.45 seconds
+Finishing & New Info duration: 3.66 seconds
+----------------------
+Initialize duration: 2.88 seconds
+Get Cookies duration: 44.28 seconds
+Minecraft Timer duration: 0.02 seconds
+Get Security Data duration: 7.11 seconds
+Securing Promises duration: 17.02 seconds
+Finishing & New Info duration: 9.44 seconds
+----------------------
+Initialize duration: 2.54 seconds
+Initialize duration: 3.03 seconds
+Get Cookies duration: 33.87 seconds
+Minecraft Timer duration: 2.47 seconds
+Get Security Data duration: 4.26 seconds
+Securing Promises duration: 16.54 seconds
+Finishing & New Info duration: 2.69 seconds
+----------------------
+Initialize duration: 2.50 seconds
+Get Cookies duration: 8.20 seconds
+Minecraft Timer duration: 0.01 seconds
+Get Security Data duration: 3.66 seconds
+Securing Promises duration: 20.91 seconds
+Finishing & New Info duration: 1.83 seconds
+----------------------
+Initialize duration: 3.05 seconds
+Initialize duration: 2.81 seconds
+Initialize duration: 1.60 seconds
+Get Cookies duration: 3.95 seconds
+Minecraft Timer duration: 2.45 seconds
+Get Security Data duration: 5.21 seconds
+Securing Promises duration: 16.14 seconds
+Finishing & New Info duration: 2.38 seconds
+----------------------
+Initialize duration: 1.08 seconds
+Initialize duration: 1.16 seconds
+Initialize duration: 1.22 seconds
+Get Cookies duration: 9.51 seconds
+Minecraft Timer duration: 0.02 seconds
+Get Security Data duration: 2.30 seconds
+Securing Promises duration: 35.24 seconds
+Finishing & New Info duration: 1.57 seconds
+----------------------
+Initialize duration: 1.04 seconds
+Get Cookies duration: 9.09 seconds
+Minecraft Timer duration: 0.02 seconds
+Get Security Data duration: 3.59 seconds
+Securing Promises duration: 3.48 seconds
+Finishing & New Info duration: 0.78 seconds
+----------------------

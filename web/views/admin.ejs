@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proton Autosecure · Admin Panel</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">
+        <img src="/assets/logo.png" alt="Proton Autosecure" class="brand-logo">
+        <span>PROTON AUTOSECURE · ADMIN</span>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="/dashboard" class="btn btn--ghost btn--small">← Dashboard</a>
+        <button id="refresh-btn" class="btn btn--ghost btn--small">🔄 Refresh</button>
+        <button id="logout-btn" class="btn btn--danger btn--small">Logout</button>
+      </div>
+    </div>
+
+    <div class="tabs" style="margin-bottom: 20px; overflow-x: auto; white-space: nowrap;">
+      <button class="tab-btn active" data-tab="users">👥 Users</button>
+      <button class="tab-btn" data-tab="licenses">🔑 Licenses</button>
+      <button class="tab-btn" data-tab="slots">🎰 Slots</button>
+      <button class="tab-btn" data-tab="transfer">🔄 Transfer</button>
+      <button class="tab-btn" data-tab="blacklist">🚫 Blacklist</button>
+      <button class="tab-btn" data-tab="splitmode">⚡ Split Mode</button>
+      <button class="tab-btn" data-tab="accounts">📋 Accounts</button>
+    </div>
+
+    <!-- Users Tab -->
+    <div id="tab-users" class="tab-content" style="display: block;">
+      <div style="display: grid; gap: 20px;">
+        <div class="panel">
+          <div class="panel__header">
+            <h3 class="panel__title">👥 All Users with Licenses</h3>
+            <span id="user-count" class="subtle">Loading...</span>
+          </div>
+          <div id="users-list" class="loading">Loading users...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Licenses Tab -->
+    <div id="tab-licenses" class="tab-content" style="display: none;">
+      <div class="panel">
+        <div class="panel__header">
+          <h3 class="panel__title">License Management</h3>
+        </div>
+        
+        <!-- Create Licenses -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Create License Keys</h4>
+          <form id="create-license-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+              <div>
+                <label>Amount</label>
+                <input type="number" id="license-amount" min="1" value="1" required>
+              </div>
+              <div>
+                <label>Duration (days)</label>
+                <input type="number" id="license-duration" min="1" value="30" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Generate Keys</button>
+              </div>
+            </div>
+          </form>
+          <div id="create-license-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- Extend All Licenses -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Extend All Active Licenses</h4>
+          <form id="extend-licenses-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px;">
+              <div>
+                <label>Duration (days)</label>
+                <input type="number" id="extend-duration" min="1" value="30" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--secondary" style="width: 100%;">Extend All</button>
+              </div>
+            </div>
+          </form>
+          <div id="extend-license-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- Check License -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Check License Status</h4>
+          <form id="check-license-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px;">
+              <div>
+                <label>License Key</label>
+                <input type="text" id="check-license-key" placeholder="Enter license key" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--secondary" style="width: 100%;">Check Status</button>
+              </div>
+            </div>
+          </form>
+          <div id="check-license-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- All Licenses List -->
+        <div class="panel__header" style="margin-top: 32px;">
+          <h4 class="panel__title">Unused License Keys</h4>
+          <button id="delete-all-licenses-btn" class="btn btn--danger btn--small">🗑️ Delete All Unused</button>
+        </div>
+        <div id="licenses-list" class="loading">Loading licenses...</div>
+      </div>
+    </div>
+
+    <!-- Slots Tab -->
+    <div id="tab-slots" class="tab-content" style="display: none;">
+      <div class="panel">
+        <div class="panel__header">
+          <h3 class="panel__title">Slot Management</h3>
+        </div>
+        
+        <!-- Create Slot Keys -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Create Slot Keys</h4>
+          <form id="create-slot-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+              <div>
+                <label>Amount</label>
+                <input type="number" id="slot-amount" min="1" value="1" required>
+              </div>
+              <div>
+                <label>User ID (optional - leave blank for keys)</label>
+                <input type="text" id="slot-user-id" placeholder="User ID to add slot directly">
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Create Slot(s)</button>
+              </div>
+            </div>
+          </form>
+          <div id="create-slot-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- Remove Slot from User -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Remove Slot from User</h4>
+          <form id="remove-slot-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px;">
+              <div>
+                <label>User ID</label>
+                <input type="text" id="remove-slot-user-id" placeholder="User ID" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--danger" style="width: 100%;">Remove Slot</button>
+              </div>
+            </div>
+          </form>
+          <div id="remove-slot-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transfer Tab -->
+    <div id="tab-transfer" class="tab-content" style="display: none;">
+      <div class="panel">
+        <div class="panel__header">
+          <h3 class="panel__title">Transfer License</h3>
+        </div>
+        
+        <div class="form-group">
+          <p class="subtle" style="margin-bottom: 16px;">Transfer a license from one user to another. This will destroy all bots from the source user and generate a new license key for the target user.</p>
+          <form id="transfer-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px;">
+              <div>
+                <label>From User ID</label>
+                <input type="text" id="transfer-from" placeholder="Source user ID" required>
+              </div>
+              <div>
+                <label>To User ID</label>
+                <input type="text" id="transfer-to" placeholder="Target user ID" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Transfer</button>
+              </div>
+            </div>
+          </form>
+          <div id="transfer-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blacklist Tab -->
+    <div id="tab-blacklist" class="tab-content" style="display: none;">
+      <div class="panel">
+        <div class="panel__header">
+          <h3 class="panel__title">Blacklist Management</h3>
+        </div>
+        
+        <!-- Add to Blacklist -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Add User to Blacklist</h4>
+          <form id="blacklist-add-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 2fr auto; gap: 12px;">
+              <div>
+                <label>User ID</label>
+                <input type="text" id="blacklist-user-id" placeholder="User ID" required>
+              </div>
+              <div>
+                <label>Reason</label>
+                <input type="text" id="blacklist-reason" placeholder="Reason for blacklist" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--danger" style="width: 100%;">Blacklist</button>
+              </div>
+            </div>
+          </form>
+          <div id="blacklist-add-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- Blacklisted Users List -->
+        <div class="panel__header" style="margin-top: 32px;">
+          <h4 class="panel__title">Blacklisted Users</h4>
+          <span id="blacklist-count" class="subtle">Loading...</span>
+        </div>
+        <div id="blacklist-list" class="loading">Loading blacklist...</div>
+      </div>
+    </div>
+
+    <!-- Split Mode Tab -->
+    <div id="tab-splitmode" class="tab-content" style="display: none;">
+      <div class="panel">
+        <div class="panel__header">
+          <h3 class="panel__title">Split Mode Management</h3>
+        </div>
+        
+        <!-- Configure Split Mode -->
+        <div class="form-group" style="margin-bottom: 24px;">
+          <h4>Configure Split Mode</h4>
+          <p class="subtle" style="margin-bottom: 16px;">Split mode allows securing every Nth account. For example, ratio 2 = every 2nd account.</p>
+          <form id="splitmode-form" style="display: grid; gap: 12px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px;">
+              <div>
+                <label>User ID</label>
+                <input type="text" id="splitmode-user-id" placeholder="User ID" required>
+              </div>
+              <div>
+                <label>Ratio (every Nth account)</label>
+                <input type="number" id="splitmode-ratio" min="2" value="2" required>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <label style="display: flex; align-items: center; gap: 8px;">
+                  <input type="checkbox" id="splitmode-enabled">
+                  <span>Enabled</span>
+                </label>
+              </div>
+              <div style="display: flex; align-items: end;">
+                <button type="submit" class="btn btn--primary" style="width: 100%;">Update</button>
+              </div>
+            </div>
+          </form>
+          <div id="splitmode-status" class="status-text" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- Split Mode Status List -->
+        <div class="panel__header" style="margin-top: 32px;">
+          <h4 class="panel__title">All Users Split Mode Status</h4>
+        </div>
+        <div id="splitmode-list" class="loading">Loading split mode status...</div>
+      </div>
+    </div>
+
+    <!-- Accounts Tab -->
+    <div id="tab-accounts" class="tab-content" style="display: none;">
+      <div style="display: grid; grid-template-columns: 250px 1fr; gap: 20px; height: calc(100vh - 200px);">
+        <!-- Sidebar -->
+        <div class="panel" style="height: fit-content; position: sticky; top: 20px;">
+          <div class="panel__header">
+            <h4 class="panel__title">Filter by User</h4>
+          </div>
+          <div style="padding: 12px;">
+            <select id="user-filter" class="select-input" style="width: 100%; margin-bottom: 12px;">
+              <option value="">📊 All Users</option>
+            </select>
+            <div id="account-count" class="subtle" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 6px;">Loading...</div>
+          </div>
+        </div>
+        
+        <!-- Accounts Display -->
+        <div>
+          <div id="accounts-list" class="loading">Loading accounts...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/admin.js"></script>
+</body>
+</html>
